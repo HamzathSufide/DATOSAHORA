@@ -4,10 +4,27 @@ import { ArrowRight, CheckCircle, Star, Target, Users, BookOpen, Clock, Briefcas
 import { pageTransition, FormModal } from './pages';
 
 // Reusable Section components for Landing Pages
-const LandingHero = ({ title, highlight, subtitle, onEnroll }) => (
-    <section className="container section" style={{ minHeight: '70vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', position: 'relative' }}>
-        <div className="bg-shape-1" style={{ top: '-10%', left: '-10%' }}></div>
-        <div className="bg-shape-2" style={{ bottom: '-10%', right: '-10%' }}></div>
+const LandingHero = ({ title, highlight, subtitle, onEnroll, backgroundVideos }) => (
+    <section className="container section" style={{ minHeight: '70vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
+        {backgroundVideos && (
+            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, display: 'flex', opacity: 0.25, pointerEvents: 'none', borderRadius: '24px', overflow: 'hidden' }}>
+                {backgroundVideos.map((video, idx) => (
+                    <div key={idx} style={{ flex: 1, overflow: 'hidden', position: 'relative' }}>
+                        <video
+                            src={video.src}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${video.scale || 1})`, transformOrigin: 'center' }}
+                        />
+                    </div>
+                ))}
+                <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'linear-gradient(to bottom, var(--bg-primary) 0%, transparent 15%, transparent 85%, var(--bg-primary) 100%)' }}></div>
+            </div>
+        )}
+        <div className="bg-shape-1" style={{ top: '-10%', left: '-10%', zIndex: 1 }}></div>
+        <div className="bg-shape-2" style={{ bottom: '-10%', right: '-10%', zIndex: 1 }}></div>
 
         <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.8, ease: "easeOut" }} style={{ position: 'relative', zIndex: 2 }}>
             <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', lineHeight: 1.1, marginBottom: '1.5rem', textWrap: 'balance' }}>
@@ -73,6 +90,10 @@ export const HousewivesLanding = () => {
                     highlight="Housewives"
                     subtitle="Discover your potential and build work-from-home skills. Transform from a homemaker to an independent earner with our structured career bootcamp."
                     onEnroll={() => setModalOpen(true)}
+                    backgroundVideos={[
+                        { src: "/Kerala_Women_s_Professional_Transformation_Video.mp4", scale: 1.08 },
+                        { src: "/Housewife.mp4", scale: 1.08 }
+                    ]}
                 />
 
                 <section className="container section" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'center' }}>
@@ -119,6 +140,9 @@ export const StudentsLanding = () => {
                     highlight="Students"
                     subtitle="Bridge the gap between education and employment. Learn practical digital skills, build a professional mindset, and become job-ready."
                     onEnroll={() => setModalOpen(true)}
+                    backgroundVideos={[
+                        { src: "/student_to_professional.mp4", scale: 1.05 }
+                    ]}
                 />
 
                 <section className="container section" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'center' }}>
@@ -165,6 +189,9 @@ export const UnemployedLanding = () => {
                     highlight="Unemployed Individuals"
                     subtitle="Feeling stuck in your career? Discover your true path, learn high-demand skills, and build a sustainable income path."
                     onEnroll={() => setModalOpen(true)}
+                    backgroundVideos={[
+                        { src: "/unemployed.mp4", scale: 1.05 }
+                    ]}
                 />
 
                 <section className="container section" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'center' }}>
