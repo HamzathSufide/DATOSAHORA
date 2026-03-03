@@ -6,18 +6,23 @@ import { Video, Calendar, Trophy, Gamepad2, PlaySquare, Crown } from 'lucide-rea
 
 export const ActivitiesLayout = () => {
     return (
-        <motion.div {...pageTransition} className="container section">
-            <h1><span className="text-gradient-red">Activities</span></h1>
-            <nav style={{ display: 'flex', gap: '1rem', marginTop: '2rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
-                <Link to="/activities/webinar" className="btn btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', display: 'flex', gap: '8px' }}><Video size={16} /> Webinar</Link>
-                <Link to="/activities/activities" className="btn btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', display: 'flex', gap: '8px' }}><Calendar size={16} /> Activities</Link>
-                <Link to="/activities/gamification" className="btn btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', display: 'flex', gap: '8px' }}><Trophy size={16} /> Gamification</Link>
-                <Link to="/activities/entertainment" className="btn btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', display: 'flex', gap: '8px' }}><Gamepad2 size={16} /> Entertainment</Link>
-            </nav>
+        <motion.div {...pageTransition} className="container section" style={{ position: 'relative' }}>
+            <div className="bg-shape-1" style={{ top: '0', left: '-10%', width: '40vw', height: '40vw' }}></div>
+            <div className="bg-shape-2" style={{ bottom: '-10%', right: '-10%', width: '40vw', height: '40vw' }}></div>
 
-            {/* Nested routes will render here */}
-            <div className="glass-panel" style={{ padding: '2rem' }}>
-                <Outlet />
+            <div style={{ position: 'relative', zIndex: 2 }}>
+                <h1><span className="text-gradient-red">Activities</span></h1>
+                <nav style={{ display: 'flex', gap: '1rem', marginTop: '2rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
+                    <Link to="/activities/webinar" className="btn btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', display: 'flex', gap: '8px' }}><Video size={16} /> Webinar</Link>
+                    <Link to="/activities/activities" className="btn btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', display: 'flex', gap: '8px' }}><Calendar size={16} /> Activities</Link>
+                    <Link to="/activities/gamification" className="btn btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', display: 'flex', gap: '8px' }}><Trophy size={16} /> Gamification</Link>
+                    <Link to="/activities/entertainment" className="btn btn-primary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem', display: 'flex', gap: '8px' }}><Gamepad2 size={16} /> Entertainment</Link>
+                </nav>
+
+                {/* Nested routes will render here */}
+                <div className="glass-panel" style={{ padding: '2rem' }}>
+                    <Outlet />
+                </div>
             </div>
         </motion.div>
     );

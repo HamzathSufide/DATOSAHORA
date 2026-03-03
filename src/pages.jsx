@@ -13,11 +13,17 @@ const PageWrapper = ({ children, title }) => (
     <motion.div
         {...pageTransition}
         className="container section"
+        style={{ position: 'relative' }}
     >
-        <h1 style={{ marginBottom: '2rem' }}>
-            <span className="text-gradient">{title}</span>
-        </h1>
-        {children}
+        <div className="bg-shape-1" style={{ top: '-10%', left: '-10%', width: '40vw', height: '40vw' }}></div>
+        <div className="bg-shape-2" style={{ bottom: '-10%', right: '-10%', width: '40vw', height: '40vw' }}></div>
+
+        <div style={{ position: 'relative', zIndex: 2 }}>
+            <h1 style={{ marginBottom: '2rem' }}>
+                <span className="text-gradient">{title}</span>
+            </h1>
+            {children}
+        </div>
     </motion.div>
 );
 

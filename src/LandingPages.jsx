@@ -5,8 +5,11 @@ import { pageTransition, FormModal } from './pages';
 
 // Reusable Section components for Landing Pages
 const LandingHero = ({ title, highlight, subtitle, onEnroll }) => (
-    <section className="container section" style={{ minHeight: '70vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center' }}>
-        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.8, ease: "easeOut" }}>
+    <section className="container section" style={{ minHeight: '70vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', position: 'relative' }}>
+        <div className="bg-shape-1" style={{ top: '-10%', left: '-10%' }}></div>
+        <div className="bg-shape-2" style={{ bottom: '-10%', right: '-10%' }}></div>
+
+        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.8, ease: "easeOut" }} style={{ position: 'relative', zIndex: 2 }}>
             <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', lineHeight: 1.1, marginBottom: '1.5rem', textWrap: 'balance' }}>
                 {title} <br /><span className="text-gradient">{highlight}</span>
             </h1>
