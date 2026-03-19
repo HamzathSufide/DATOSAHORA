@@ -6,7 +6,6 @@ import { Home, Services, KnowledgeBase, About, Contact, Refer } from './pages';
 import { ActivitiesLayout, Webinar, GeneralActivities, Gamification, Entertainment } from './Activities';
 import { HousewivesLanding, StudentsLanding, UnemployedLanding } from './LandingPages';
 import { Blog } from './Blog';
-import { BackgroundGalaxy } from './BackgroundGalaxy';
 import { Menu, X, Mail, MapPin, Phone } from 'lucide-react';
 
 import './App.css';
@@ -211,7 +210,6 @@ function App() {
   return (
     <Router>
       <div className="app-container" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-        <BackgroundGalaxy />
         <NavBar />
         <main style={{ flex: 1 }}>
           <AnimatedRoutes />
