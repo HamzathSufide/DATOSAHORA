@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, CheckCircle, Star, Target, Users, BookOpen, Clock, Briefcase, Award } from 'lucide-react';
-import { pageTransition, FormModal } from './pages';
+import { pageTransition, FormModal, Float3D } from './pages';
 
 // Reusable Section components for Landing Pages
 const LandingHero = ({ title, highlight, subtitle, onEnroll, backgroundVideos }) => (
-    <section className="container section" style={{ minHeight: '70vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-        {backgroundVideos && (
-            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, display: 'flex', opacity: 0.25, pointerEvents: 'none', borderRadius: '24px', overflow: 'hidden' }}>
+    <section className="container section" style={{ position: 'relative', overflow: 'hidden', minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center', textAlign: 'center', borderRadius: '32px', marginBottom: '4rem' }}>
+        {backgroundVideos && backgroundVideos.length > 0 && (
+            <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, display: 'flex', pointerEvents: 'none', borderRadius: '24px', overflow: 'hidden' }}>
                 {backgroundVideos.map((video, idx) => (
                     <div key={idx} style={{ flex: 1, overflow: 'hidden', position: 'relative' }}>
                         <video
@@ -23,12 +23,9 @@ const LandingHero = ({ title, highlight, subtitle, onEnroll, backgroundVideos })
                 <div style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, background: 'linear-gradient(to bottom, var(--bg-primary) 0%, transparent 15%, transparent 85%, var(--bg-primary) 100%)' }}></div>
             </div>
         )}
-        <div className="bg-shape-1" style={{ top: '-10%', left: '-10%', zIndex: 1 }}></div>
-        <div className="bg-shape-2" style={{ bottom: '-10%', right: '-10%', zIndex: 1 }}></div>
-
         <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.8, ease: "easeOut" }} style={{ position: 'relative', zIndex: 2 }}>
             <h1 style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)', lineHeight: 1.1, marginBottom: '1.5rem', textWrap: 'balance' }}>
-                {title} <br /><span className="text-gradient">{highlight}</span>
+                {title} <br /><span className="text-image-clip">{highlight}</span>
             </h1>
             <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '800px', margin: '0 auto 2.5rem', lineHeight: 1.6 }}>
                 {subtitle}
@@ -46,17 +43,19 @@ const CurriculumSection = ({ title, modules }) => (
             <h2 style={{ fontSize: '2.5rem', marginBottom: '3rem', textAlign: 'center' }}>{title}</h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
                 {modules.map((mod, i) => (
-                    <div key={i} className="glass-panel" style={{ padding: '2rem', borderTop: `2px solid ${i % 2 === 0 ? 'var(--accent-red)' : 'var(--accent-gold)'}` }}>
-                        <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>{mod.name}</h3>
-                        <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.8rem', color: 'var(--text-secondary)' }}>
-                            {mod.topics.map((topic, j) => (
-                                <li key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
-                                    <CheckCircle size={18} color="var(--accent-gold)" style={{ marginTop: '3px', flexShrink: 0 }} />
-                                    <span>{topic}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+                    <Float3D key={i} delay={i * 0.2}>
+                        <div className="glass-panel" style={{ padding: '2rem', height: '100%', borderTop: `2px solid ${i % 2 === 0 ? 'var(--accent-red)' : 'var(--accent-gold)'}` }}>
+                            <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem' }}>{mod.name}</h3>
+                            <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.8rem', color: 'var(--text-secondary)' }}>
+                                {mod.topics.map((topic, j) => (
+                                    <li key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
+                                        <CheckCircle size={18} color="var(--accent-gold)" style={{ marginTop: '3px', flexShrink: 0 }} />
+                                        <span>{topic}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </Float3D>
                 ))}
             </div>
         </div>
@@ -65,17 +64,19 @@ const CurriculumSection = ({ title, modules }) => (
 
 const PricingSection = ({ price, onEnroll }) => (
     <section className="container section" style={{ textAlign: 'center' }}>
-        <div className="glass-panel" style={{ maxWidth: '600px', margin: '0 auto', padding: '4rem 2rem', border: '1px solid var(--accent-gold)' }}>
-            <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Invest in Your Future</h2>
-            <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', fontSize: '1.1rem' }}>Complete access to the bootcamp, mentorship, and community.</p>
-            <div style={{ fontSize: '4rem', fontWeight: 'bold', color: 'white', marginBottom: '2rem' }}>
-                ₹{price}
+        <Float3D>
+            <div className="glass-panel" style={{ maxWidth: '600px', margin: '0 auto', padding: '4rem 2rem', border: '1px solid var(--accent-gold)' }}>
+                <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Invest in Your Future</h2>
+                <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', fontSize: '1.1rem' }}>Complete access to the bootcamp, mentorship, and community.</p>
+                <div style={{ fontSize: '4rem', fontWeight: 'bold', color: 'white', marginBottom: '2rem' }}>
+                    ₹{price}
+                </div>
+                <button onClick={onEnroll} className="btn btn-gold" style={{ fontSize: '1.2rem', padding: '1.2rem 3rem', width: '100%' }}>
+                    Enroll Now
+                </button>
+                <p style={{ color: 'var(--text-secondary)', marginTop: '1.5rem', fontSize: '0.9rem' }}>Secure checkout. 100% satisfaction guarantee.</p>
             </div>
-            <button onClick={onEnroll} className="btn btn-gold" style={{ fontSize: '1.2rem', padding: '1.2rem 3rem', width: '100%' }}>
-                Enroll Now
-            </button>
-            <p style={{ color: 'var(--text-secondary)', marginTop: '1.5rem', fontSize: '0.9rem' }}>Secure checkout. 100% satisfaction guarantee.</p>
-        </div>
+        </Float3D>
     </section>
 );
 
@@ -100,7 +101,7 @@ export const HousewivesLanding = () => {
                     <div>
                         <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>Designed for Your Busy Life</h2>
                         <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', marginBottom: '1.5rem', lineHeight: 1.6 }}>
-                            We understand that managing a household is a full-time job. This program is specifically designed to help you find "hidden hours", build your confidence, and learn flexible digital skills that allow you to earn from home.
+                            We understand that managing a household is a full-time job. This program is specifically designed to help you find \"hidden hours\", build your confidence, and learn flexible digital skills that allow you to earn from home.
                         </p>
                         <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                             <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><Clock size={20} color="var(--accent-red)" /> Time management for mothers</li>
@@ -108,11 +109,13 @@ export const HousewivesLanding = () => {
                             <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><Target size={20} color="var(--accent-red)" /> Work-from-home career options</li>
                         </ul>
                     </div>
-                    <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center' }}>
-                        <TrophyIcon />
-                        <h3 style={{ fontSize: '1.8rem', marginTop: '1.5rem', marginBottom: '1rem' }}>Outcome</h3>
-                        <p style={{ fontSize: '1.2rem', color: 'var(--accent-gold)' }}>Gain the ability to start earning from home independently.</p>
-                    </div>
+                    <Float3D>
+                        <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center', height: '100%' }}>
+                            <TrophyIcon />
+                            <h3 style={{ fontSize: '1.8rem', marginTop: '1.5rem', marginBottom: '1rem' }}>Outcome</h3>
+                            <p style={{ fontSize: '1.2rem', color: 'var(--accent-gold)' }}>Gain the ability to start earning from home independently.</p>
+                        </div>
+                    </Float3D>
                 </section>
 
                 <CurriculumSection
@@ -146,11 +149,13 @@ export const StudentsLanding = () => {
                 />
 
                 <section className="container section" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'center' }}>
-                    <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center' }}>
-                        <BookOpen size={64} color="var(--accent-gold)" style={{ margin: '0 auto' }} />
-                        <h3 style={{ fontSize: '1.8rem', marginTop: '1.5rem', marginBottom: '1rem' }}>Outcome</h3>
-                        <p style={{ fontSize: '1.2rem', color: 'white' }}>Students become job-ready with a strong portfolio.</p>
-                    </div>
+                    <Float3D>
+                        <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center', height: '100%' }}>
+                            <BookOpen size={64} color="var(--accent-gold)" style={{ margin: '0 auto' }} />
+                            <h3 style={{ fontSize: '1.8rem', marginTop: '1.5rem', marginBottom: '1rem' }}>Outcome</h3>
+                            <p style={{ fontSize: '1.2rem', color: 'white' }}>Students become job-ready with a strong portfolio.</p>
+                        </div>
+                    </Float3D>
                     <div>
                         <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem' }}>Practical Skills for the Real World</h2>
                         <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', marginBottom: '1.5rem', lineHeight: 1.6 }}>
@@ -206,11 +211,13 @@ export const UnemployedLanding = () => {
                             <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><Briefcase size={20} color="#00b4d8" /> Online income strategies</li>
                         </ul>
                     </div>
-                    <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center', borderColor: '#00b4d8' }}>
-                        <Target size={64} color="#00b4d8" style={{ margin: '0 auto' }} />
-                        <h3 style={{ fontSize: '1.8rem', marginTop: '1.5rem', marginBottom: '1rem' }}>Outcome</h3>
-                        <p style={{ fontSize: '1.2rem', color: 'white' }}>Build a sustainable income path and reclaim your career.</p>
-                    </div>
+                    <Float3D>
+                        <div className="glass-panel" style={{ padding: '3rem', textAlign: 'center', borderColor: '#00b4d8', height: '100%' }}>
+                            <Target size={64} color="#00b4d8" style={{ margin: '0 auto' }} />
+                            <h3 style={{ fontSize: '1.8rem', marginTop: '1.5rem', marginBottom: '1rem' }}>Outcome</h3>
+                            <p style={{ fontSize: '1.2rem', color: 'white' }}>Build a sustainable income path and reclaim your career.</p>
+                        </div>
+                    </Float3D>
                 </section>
 
                 <CurriculumSection

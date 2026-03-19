@@ -3,11 +3,32 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Star, Shield, Zap, Award, X, MessageSquareQuote, CheckCircle, Users, Target, Briefcase, BookOpen, HeartHandshake, PlayCircle } from 'lucide-react';
 
 export const pageTransition = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -20 },
-    transition: { duration: 0.4, ease: 'easeOut' }
+    initial: { opacity: 0, y: 20, rotateX: 10 },
+    animate: { opacity: 1, y: 0, rotateX: 0 },
+    exit: { opacity: 0, y: -20, rotateX: -10 },
+    transition: { duration: 0.5, ease: 'easeOut' }
 };
+
+export const Float3D = ({ children, className = "", style = {}, delay = 0 }) => (
+    <motion.div
+        className={className}
+        style={{ perspective: 1200, ...style }}
+    >
+        <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+                duration: 0.6,
+                ease: "easeOut",
+                delay: delay
+            }}
+            style={{ width: '100%', height: '100%', transformStyle: 'preserve-3d' }}
+            whileHover={{ scale: 1.02, y: -5, transition: { duration: 0.2 } }}
+        >
+            {children}
+        </motion.div>
+    </motion.div>
+);
 
 const PageWrapper = ({ children, title }) => (
     <motion.div
@@ -20,7 +41,7 @@ const PageWrapper = ({ children, title }) => (
 
         <div style={{ position: 'relative', zIndex: 2 }}>
             <h1 style={{ marginBottom: '2rem' }}>
-                <span className="text-gradient">{title}</span>
+                <span style={{ color: 'var(--accent-red)' }}>{title}</span>
             </h1>
             {children}
         </div>
@@ -116,7 +137,7 @@ export const FormModal = ({ isOpen, onClose, title, defaultCategory = "" }) => {
                                 <CheckCircle size={64} color="var(--accent-gold)" style={{ margin: '0 auto 1.5rem' }} />
                                 <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Thank You!</h2>
                                 <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', fontSize: '1.1rem' }}>
-                                    Thank you for enrolling in Datosahora. Please join our WhatsApp community to receive program updates and access your Bootcamp Dashboard.
+                                    Thank you for enrolling in Kanlearn. Please join our WhatsApp community to receive program updates and access your Bootcamp Dashboard.
                                 </p>
                                 <a href="https://chat.whatsapp.com/invite" target="_blank" rel="noopener noreferrer" className="btn btn-gold" style={{ display: 'inline-flex', padding: '1rem 2rem', fontSize: '1.1rem', width: '100%', justifyContent: 'center' }}>
                                     Join WhatsApp Group
@@ -132,24 +153,24 @@ export const FormModal = ({ isOpen, onClose, title, defaultCategory = "" }) => {
 
 const InstagramFeed = () => {
     const reels = [
-        { id: 1, user: "datosahora_academy", views: "12.4K", caption: "Day 1 of Bootcamp: Finding your hidden skills! 🚀 #freelancing #housewives" },
-        { id: 2, user: "datosahora_academy", views: "8.9K", caption: "Student success story: How Rahul got his first client. 💻 #digitalmarketing" },
-        { id: 3, user: "datosahora_academy", views: "15.2K", caption: "Stop scrolling, start earning. Mindset shift 101. 🧠 #careergrowth" },
-        { id: 4, user: "datosahora_academy", views: "5.1K", caption: "Behind the scenes of our Daily Live Calls! 📞 #datosahora" }
+        { id: 1, user: "kanlearn_academy", views: "12.4K", caption: "Day 1 of Bootcamp: Finding your hidden skills! 🚀 #freelancing #housewives" },
+        { id: 2, user: "kanlearn_academy", views: "8.9K", caption: "Student success story: How Rahul got his first client. 💻 #digitalmarketing" },
+        { id: 3, user: "kanlearn_academy", views: "15.2K", caption: "Stop scrolling, start earning. Mindset shift 101. 🧠 #careergrowth" },
+        { id: 4, user: "kanlearn_academy", views: "5.1K", caption: "Behind the scenes of our Daily Live Calls! 📞 #kanlearn" }
     ];
 
     return (
         <section className="container section" style={{ padding: '4rem 0' }}>
             <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-                <h2 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Join the Daily <span className="text-gradient">Motivation</span></h2>
+                <h2 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Join the Daily <span style={{ color: 'var(--accent-red)' }}>Motivation</span></h2>
                 <p style={{ color: 'var(--text-secondary)' }}>Follow us on Instagram for daily tips, live sessions, and student wins.</p>
             </div>
 
             <div className="scroll-carousel" style={{ paddingBottom: '1rem' }}>
                 {reels.map(reel => (
-                    <div key={reel.id} className="carousel-item" style={{ width: '280px' }}>
+                    <Float3D key={reel.id} className="carousel-item" style={{ width: '280px' }} delay={reel.id * 0.2}>
                         <div className="ig-video-card">
-                            <div className="ig-video-content">
+                            <div className="ig-video-content" style={{ background: `url('https://images.unsplash.com/photo-${1500000000000 + reel.id * 100000}?auto=format&fit=crop&w=400&q=80') center/cover` }}>
                                 <PlayCircle size={64} color="rgba(255,255,255,0.8)" style={{ filter: 'drop-shadow(0 4px 6px rgba(0,0,0,0.3))' }} />
                             </div>
                             <div className="ig-video-overlay" />
@@ -162,11 +183,11 @@ const InstagramFeed = () => {
                                 <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '0.5rem' }}>{reel.views} views</p>
                             </div>
                         </div>
-                    </div>
+                    </Float3D>
                 ))}
             </div>
             <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-                <a href="#" className="btn glass-panel" style={{ padding: '0.8rem 2rem' }}>@datosahora_academy</a>
+                <a href="#" className="btn glass-panel" style={{ padding: '0.8rem 2rem' }}>@kanlearn_academy</a>
             </div>
         </section>
     );
@@ -175,9 +196,7 @@ const InstagramFeed = () => {
 export const Home = () => {
     return (
         <motion.div {...pageTransition} style={{ width: '100%', position: 'relative', overflow: 'hidden' }}>
-            {/* GEOMETRIC BACKGROUND SHAPES */}
-            <div className="bg-shape-1" />
-            <div className="bg-shape-2" />
+            {/* GALAXY BACKGROUND COMPONENT IS HANDLED IN APP OR CSS */}
 
             {/* HERO SECTION */}
             <section className="container section" style={{ minHeight: '85vh', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', position: 'relative', zIndex: 1 }}>
@@ -190,10 +209,10 @@ export const Home = () => {
                         Discover Your Potential. Build Skills. Start Earning.
                     </span>
                     <h1 style={{ fontSize: 'clamp(3rem, 7vw, 5.5rem)', lineHeight: 1.1, marginBottom: '1.5rem', textWrap: 'balance', fontWeight: 800 }}>
-                        Transform Your Career with <br /><span className="text-gradient">Structured Skill Development</span>
+                        Transform Your Career with <br /><span className="text-image-clip">Structured Skill Development</span>
                     </h1>
                     <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 3rem', lineHeight: 1.6 }}>
-                        DATOSAHORA empowers housewives, students, and targeted individuals to build professional skills and start earning through high-impact training and gamified mentorship.
+                        KANLEARN empowers housewives, students, and targeted individuals to build professional skills and start earning through high-impact training and gamified mentorship.
                     </p>
                     <div style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                         <a href="/services" className="btn btn-primary" style={{ fontSize: '1.1rem', padding: '1.2rem 2.5rem', boxShadow: '0 10px 30px rgba(230,57,70,0.3)' }}>
@@ -219,7 +238,7 @@ export const Home = () => {
                     >
                         <h2 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', lineHeight: 1.2 }}>Empowering People to Build a <span className="text-gradient-red">Career from Anywhere</span></h2>
                         <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', marginBottom: '1.5rem', lineHeight: 1.7 }}>
-                            Founded by <strong>Hamzath Sufide P S</strong>, Datosahora is built on a singular vision: to strip away the dependency that holds people back from realizing their true potential. We believe financial independence is not a privilege, but a right accessible to everyone.
+                            Founded by <strong>Hamzath Sufide P S</strong>, Kanlearn is built on a singular vision: to strip away the dependency that holds people back from realizing their true potential. We believe financial independence is not a privilege, but a right accessible to everyone.
                         </p>
                         <p style={{ fontSize: '1.1rem', color: 'var(--text-secondary)', lineHeight: 1.7 }}>
                             Whether you are a homemaker looking to reclaim your identity, a student needing direction, or someone seeking to restart a stalled career, our configured learning platform is designed to transform beginners into confident professionals.
@@ -257,7 +276,7 @@ export const Home = () => {
                 <div className="container">
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
                         <div>
-                            <h2 style={{ fontSize: '2.5rem' }}>Focused <span className="text-gradient">Career Tracks</span></h2>
+                            <h2 style={{ fontSize: '2.5rem' }}>Focused <span className="text-image-clip">Career Tracks</span></h2>
                             <p style={{ color: 'var(--text-secondary)', marginTop: '0.5rem' }}>Swipe right to explore our deeply structured programs.</p>
                         </div>
                         <a href="/services" className="btn glass-panel">View All Curriculum</a>
@@ -266,34 +285,34 @@ export const Home = () => {
 
                 <div className="container scroll-carousel">
                     {/* Housewives Card */}
-                    <div className="carousel-item">
+                    <Float3D className="carousel-item" delay={0}>
                         <div className="glass-panel" style={{ padding: '2.5rem', height: '100%', display: 'flex', flexDirection: 'column', borderTop: '2px solid var(--accent-red)' }}>
-                            <HeartHandshake size={32} color="var(--accent-red)" style={{ marginBottom: '1.5rem' }} />
-                            <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem' }}>Career Restart for Housewives</h3>
-                            <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', flexGrow: 1 }}>Rediscover your potential and build income-generating digital skills from home. Master time management and unlock the 'hidden hours'.</p>
-                            <a href="/programs/housewives" style={{ color: 'var(--accent-gold)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px' }}>Explore track <ArrowRight size={16} /></a>
+                            <HeartHandshake size={32} color="var(--accent-red)" style={{ marginBottom: '1.5rem', transform: 'translateZ(30px)' }} />
+                            <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', transform: 'translateZ(20px)' }}>Career Restart for Housewives</h3>
+                            <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', flexGrow: 1, transform: 'translateZ(10px)' }}>Rediscover your potential and build income-generating digital skills from home. Master time management and unlock the 'hidden hours'.</p>
+                            <a href="/programs/housewives" style={{ color: 'var(--accent-gold)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', transform: 'translateZ(20px)' }}>Explore track <ArrowRight size={16} /></a>
                         </div>
-                    </div>
+                    </Float3D>
 
                     {/* Students Card */}
-                    <div className="carousel-item">
+                    <Float3D className="carousel-item" delay={0.2}>
                         <div className="glass-panel" style={{ padding: '2.5rem', height: '100%', display: 'flex', flexDirection: 'column', borderTop: '2px solid var(--accent-gold)' }}>
-                            <BookOpen size={32} color="var(--accent-gold)" style={{ marginBottom: '1.5rem' }} />
-                            <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem' }}>Skill Development for Students</h3>
-                            <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', flexGrow: 1 }}>Bridge the gap between academia and application. Build a strong personal brand, learn modern tools, and secure your first internship.</p>
-                            <a href="/programs/students" style={{ color: 'var(--accent-gold)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px' }}>Explore track <ArrowRight size={16} /></a>
+                            <BookOpen size={32} color="var(--accent-gold)" style={{ marginBottom: '1.5rem', transform: 'translateZ(30px)' }} />
+                            <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', transform: 'translateZ(20px)' }}>Skill Development for Students</h3>
+                            <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', flexGrow: 1, transform: 'translateZ(10px)' }}>Bridge the gap between academia and application. Build a strong personal brand, learn modern tools, and secure your first internship.</p>
+                            <a href="/programs/students" style={{ color: 'var(--accent-gold)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', transform: 'translateZ(20px)' }}>Explore track <ArrowRight size={16} /></a>
                         </div>
-                    </div>
+                    </Float3D>
 
                     {/* Unemployed Card */}
-                    <div className="carousel-item">
+                    <Float3D className="carousel-item" delay={0.4}>
                         <div className="glass-panel" style={{ padding: '2.5rem', height: '100%', display: 'flex', flexDirection: 'column', borderTop: '2px solid #00b4d8' }}>
-                            <Users size={32} color="#00b4d8" style={{ marginBottom: '1.5rem' }} />
-                            <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem' }}>Transformation for Unemployed</h3>
-                            <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', flexGrow: 1 }}>Break out of the rut. We provide psychological confidence building alongside hard digital skills to help you build a sustainable income.</p>
-                            <a href="/programs/unemployed" style={{ color: 'var(--accent-gold)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px' }}>Explore track <ArrowRight size={16} /></a>
+                            <Users size={32} color="#00b4d8" style={{ marginBottom: '1.5rem', transform: 'translateZ(30px)' }} />
+                            <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', transform: 'translateZ(20px)' }}>Transformation for Unemployed</h3>
+                            <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', flexGrow: 1, transform: 'translateZ(10px)' }}>Break out of the rut. We provide psychological confidence building alongside hard digital skills to help you build a sustainable income.</p>
+                            <a href="/programs/unemployed" style={{ color: 'var(--accent-gold)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', transform: 'translateZ(20px)' }}>Explore track <ArrowRight size={16} /></a>
                         </div>
-                    </div>
+                    </Float3D>
                 </div>
             </section>
 
@@ -321,7 +340,7 @@ export const Home = () => {
                         {[
                             { name: "Anjali M.", role: "Housewife to Freelancer", text: "The career restart program showed me the 'hidden hours'. I now manage social media clients entirely from my phone." },
                             { name: "Rahul S.", role: "Student & Content Creator", text: "The skills training gave me clarity. I learned digital marketing and leveraged it to secure my first remote internship." },
-                            { name: "Priya K.", role: "Virtual Assistant", text: "Career guidance for the unemployed is rare. Datosahora gave me complete confidence, accountability, and a roadmap to earn." }
+                            { name: "Priya K.", role: "Virtual Assistant", text: "Career guidance for the unemployed is rare. Kanlearn gave me complete confidence, accountability, and a roadmap to earn." }
                         ].map((testimonial, i) => (
                             <motion.div
                                 key={i}
@@ -455,7 +474,7 @@ export const About = () => (
             <div className="glass-panel" style={{ padding: '3rem' }}>
                 <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Our Mission</h2>
                 <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem', lineHeight: 1.8 }}>
-                    Datosahora is built on a singular vision by founder Hamzath Sufide P S: to strip away the dependency that holds people back from realizing their true potential. We believe that financial independence should not be a privilege, but a right accessible to everyone—from housewives looking to reclaim their identity to students striving for an early head start.
+                    Kanlearn is built on a singular vision by founder Hamzath Sufide P S: to strip away the dependency that holds people back from realizing their true potential. We believe that financial independence should not be a privilege, but a right accessible to everyone—from housewives looking to reclaim their identity to students striving for an early head start.
                 </p>
             </div>
 
@@ -482,7 +501,7 @@ export const Contact = () => (
                 <h2 style={{ fontSize: '2rem', marginBottom: '1rem' }}>Get in touch</h2>
                 <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem' }}>We'd love to hear from you. Drop us a message and we'll reply as soon as possible.</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                    <p><strong>Email:</strong> support@datosahora.com</p>
+                    <p><strong>Email:</strong> support@kanlearn.com</p>
                     <p><strong>Phone:</strong> +91 XXXXX XXXXX</p>
                     <p><strong>Location:</strong> Thrissur, Kerala, India</p>
                 </div>
@@ -505,10 +524,10 @@ export const Refer = () => (
             <Award size={64} color="var(--accent-gold)" style={{ margin: '0 auto 2rem' }} />
             <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>Share the wealth. Build the community.</h2>
             <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto 2rem' }}>
-                Invite your friends and family to Datosahora. For every successful referral who joins our Career Restart, Student Skill, or Career Transformation programs, you earn an exclusive commission directly to your account.
+                Invite your friends and family to Kanlearn. For every successful referral who joins our Career Restart, Student Skill, or Career Transformation programs, you earn an exclusive commission directly to your account.
             </p>
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
-                <input type="text" value="https://datosahora.com/ref/hamzath" readOnly style={{ padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'var(--bg-primary)', color: 'white', width: '300px' }} />
+            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', marginBottom: '3rem' }}>
+                <input type="text" value="https://kanlearn.com/ref/hamzath" readOnly style={{ padding: '1rem', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.1)', background: 'var(--bg-primary)', color: 'white', width: '300px' }} />
                 <button className="btn btn-primary">Copy Link</button>
             </div>
         </div>

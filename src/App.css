@@ -4,13 +4,13 @@
    PHASE 5: Modern Visual & Structural CSS
    ----------------------------------------- */
 
-/* Geometric Background Blobs */
+/* Geometric Background Blobs Simplified */
 .bg-shape-1 {
     position: absolute;
     top: -10%;
     right: -5%;
-    width: 400px;
-    height: 400px;
+    width: 600px;
+    height: 600px;
     background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
     border-radius: 50%;
     z-index: 0;
@@ -23,7 +23,7 @@
     left: -10%;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(230, 57, 70, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+    background: radial-gradient(circle, rgba(230, 57, 70, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
     border-radius: 50%;
     z-index: 0;
     pointer-events: none;

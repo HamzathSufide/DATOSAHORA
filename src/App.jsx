@@ -6,6 +6,7 @@ import { Home, Services, KnowledgeBase, About, Contact, Refer } from './pages';
 import { ActivitiesLayout, Webinar, GeneralActivities, Gamification, Entertainment } from './Activities';
 import { HousewivesLanding, StudentsLanding, UnemployedLanding } from './LandingPages';
 import { Blog } from './Blog';
+import { BackgroundGalaxy } from './BackgroundGalaxy';
 import { Menu, X, Mail, MapPin, Phone } from 'lucide-react';
 
 import './App.css';
@@ -23,8 +24,19 @@ const NavBar = () => {
         borderBottom: '1px solid rgba(255,255,255,0.05)'
       }}>
         <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '80px' }}>
-          <Link to="/" style={{ fontSize: '1.5rem', fontWeight: 800, fontFamily: 'var(--font-heading)', letterSpacing: '-1px' }}>
-            DATOS<span style={{ color: 'var(--accent-red)' }}>AHORA</span>
+          <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '12px', textDecoration: 'none' }}>
+            <motion.img
+              whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
+              transition={{ duration: 0.5 }}
+              src="/kanlearn_no_bg.png" alt="Kanlearn Logo"
+              style={{ height: '75px', objectFit: 'contain', filter: 'drop-shadow(0px 0px 15px rgba(230, 57, 70, 0.6))' }}
+            />
+            <motion.span
+              whileHover={{ scale: 1.05 }}
+              style={{ fontSize: '2.2rem', fontWeight: 900, fontFamily: 'var(--font-heading)', letterSpacing: '-1.5px', color: 'white', textShadow: '0 4px 20px rgba(0,0,0,0.4)' }}
+            >
+              KAN<span className="text-gradient-red">LEARN</span>
+            </motion.span>
           </Link>
 
           {/* Desktop Nav */}
@@ -113,8 +125,19 @@ const Footer = () => (
   <footer style={{ backgroundColor: 'var(--bg-elevated)', borderTop: '1px solid rgba(255,255,255,0.05)', padding: '4rem 0 2rem', marginTop: 'auto' }}>
     <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '3rem', marginBottom: '3rem' }}>
       <div>
-        <Link to="/" style={{ fontSize: '1.5rem', fontWeight: 800, fontFamily: 'var(--font-heading)', letterSpacing: '-1px', display: 'block', marginBottom: '1rem' }}>
-          DATOS<span style={{ color: 'var(--accent-red)' }}>AHORA</span>
+        <Link to="/" style={{ display: 'flex', alignItems: 'center', gap: '15px', marginBottom: '1.5rem', textDecoration: 'none' }}>
+          <motion.img
+            whileHover={{ scale: 1.1, rotate: [0, -5, 5, 0] }}
+            transition={{ duration: 0.5 }}
+            src="/kanlearn_no_bg.png" alt="Kanlearn Logo"
+            style={{ height: '90px', objectFit: 'contain', filter: 'drop-shadow(0px 0px 20px rgba(212, 175, 55, 0.6))' }}
+          />
+          <motion.span
+            whileHover={{ scale: 1.05 }}
+            style={{ fontSize: '2.5rem', fontWeight: 900, fontFamily: 'var(--font-heading)', letterSpacing: '-2px', color: 'white', textShadow: '0 4px 20px rgba(0,0,0,0.4)' }}
+          >
+            KAN<span className="text-gradient">LEARN</span>
+          </motion.span>
         </Link>
         <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Empowering individuals to achieve true financial independence through curated learning and mentorship.</p>
       </div>
@@ -133,14 +156,14 @@ const Footer = () => (
       <div>
         <h4 style={{ marginBottom: '1.5rem', color: 'white' }}>Contact Us</h4>
         <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '1rem', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
-          <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><Mail size={16} color="var(--accent-red)" /> support@datosahora.com</li>
+          <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><Mail size={16} color="var(--accent-red)" /> support@kanlearn.com</li>
           <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><Phone size={16} color="var(--accent-red)" /> +91 9747970899</li>
           <li style={{ display: 'flex', alignItems: 'center', gap: '10px' }}><MapPin size={16} color="var(--accent-red)" /> Thrissur, Kerala, India</li>
         </ul>
       </div>
     </div>
     <div className="container" style={{ borderTop: '1px solid rgba(255,255,255,0.05)', paddingTop: '2rem', textAlign: 'center', color: 'var(--text-secondary)', fontSize: '0.85rem' }}>
-      &copy; {new Date().getFullYear()} Datosahora. All rights reserved. Directed by Hamzath Sufide P S.
+      &copy; {new Date().getFullYear()} Kanlearn. All rights reserved. Directed by Hamzath Sufide P S.
     </div>
     <style>{`
             .footer-link {
@@ -188,6 +211,7 @@ function App() {
   return (
     <Router>
       <div className="app-container" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <BackgroundGalaxy />
         <NavBar />
         <main style={{ flex: 1 }}>
           <AnimatedRoutes />
