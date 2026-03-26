@@ -15,15 +15,15 @@
   /* Muted text */
   --text-inverse: #000000;
 
-  --accent-red: #e63946;
+  --accent-red: #ff0000;
   /* Vibrant Red */
-  --accent-red-hover: #f04e5a;
-  --accent-red-glow: rgba(230, 57, 70, 0.4);
+  --accent-red-hover: #cc0000;
+  --accent-red-glow: rgba(255, 0, 0, 0.4);
 
-  --accent-gold: #d4af37;
+  --accent-gold: #ffd700;
   /* Premium Gold */
-  --accent-gold-hover: #ebd074;
-  --accent-gold-glow: rgba(212, 175, 55, 0.3);
+  --accent-gold-hover: #ffcc00;
+  --accent-gold-glow: rgba(255, 215, 0, 0.3);
 
   /* Typography */
   --font-heading: 'Outfit', sans-serif;
@@ -108,7 +108,7 @@ button {
 }
 
 .text-gradient-red {
-  background: linear-gradient(135deg, var(--accent-red), #ff7b85);
+  background: linear-gradient(135deg, var(--accent-red), #ff4d4d);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -116,7 +116,7 @@ button {
 
 /* Text image clipping optimized */
 .text-image-clip {
-  background: linear-gradient(135deg, #e63946, #d4af37, #00b4d8);
+  background: linear-gradient(135deg, var(--accent-red), var(--accent-gold), var(--accent-red));
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

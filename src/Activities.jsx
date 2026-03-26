@@ -66,8 +66,8 @@ export const GeneralActivities = () => (
                 </div>
             </Float3D>
             <Float3D delay={0.2}>
-                <div className="glass-panel" style={{ padding: '1.5rem', borderLeft: '4px solid #00b4d8' }}>
-                    <h3 style={{ marginBottom: '0.5rem', color: '#00b4d8' }}>Learning Sessions (10:30 AM)</h3>
+                <div className="glass-panel" style={{ padding: '1.5rem', borderLeft: '4px solid var(--accent-gold)' }}>
+                    <h3 style={{ marginBottom: '0.5rem', color: 'var(--accent-gold)' }}>Learning Sessions (10:30 AM)</h3>
                     <p style={{ color: 'var(--text-secondary)' }}>Deep dive into the weekly module (e.g., Intro to Canva, Freelance Platforms).</p>
                 </div>
             </Float3D>

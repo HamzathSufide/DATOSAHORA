@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Star, Shield, Zap, Award, X, MessageSquareQuote, CheckCircle, Users, Target, Briefcase, BookOpen, HeartHandshake, PlayCircle } from 'lucide-react';
+import { ArrowRight, Star, Shield, Zap, Award, X, MessageSquareQuote, CheckCircle, Users, Target, Briefcase, BookOpen, HeartHandshake, PlayCircle, Trophy } from 'lucide-react';
+import { GamifiedRoadmap } from './components/GamifiedRoadmap';
+import { Leaderboard } from './components/Leaderboard';
+import { ToolsCarousel } from './components/ToolsCarousel';
 
 export const pageTransition = {
     initial: { opacity: 0, y: 20, rotateX: 10 },
@@ -260,7 +263,7 @@ export const Home = () => {
                             <h3 style={{ fontSize: '2.5rem', color: 'white' }}>95%</h3>
                             <p style={{ color: 'var(--accent-red)', fontSize: '0.9rem', textTransform: 'uppercase', letterSpacing: '1px' }}>Success Rate</p>
                         </div>
-                        <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', gridColumn: '1 / -1', background: 'linear-gradient(135deg, rgba(255,255,255,0.05), rgba(212,175,55,0.05))' }}>
+                        <div className="glass-panel" style={{ padding: '2rem', textAlign: 'center', gridColumn: '1 / -1', background: 'linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255, 215, 0, 0.05))' }}>
                             <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Gamified Learning</h3>
                             <p style={{ color: 'var(--text-secondary)' }}>Earn XP, level up, and achieve financial independence.</p>
                         </div>
@@ -268,7 +271,16 @@ export const Home = () => {
                 </div>
             </section>
 
-            {/* INSTAGRAM FEED (NEW SECTION) */}
+            {/* GAMIFIED ROADMAP (NEW) */}
+            <GamifiedRoadmap />
+
+            {/* TOOLS CAROUSEL (NEW) */}
+            <ToolsCarousel />
+
+            {/* LEADERBOARD (NEW) */}
+            <Leaderboard />
+
+            {/* INSTAGRAM FEED */}
             <InstagramFeed />
 
             {/* OUR PROGRAMS CAROUSEL */}
@@ -306,8 +318,8 @@ export const Home = () => {
 
                     {/* Unemployed Card */}
                     <Float3D className="carousel-item" delay={0.4}>
-                        <div className="glass-panel" style={{ padding: '2.5rem', height: '100%', display: 'flex', flexDirection: 'column', borderTop: '2px solid #00b4d8' }}>
-                            <Users size={32} color="#00b4d8" style={{ marginBottom: '1.5rem', transform: 'translateZ(30px)' }} />
+                        <div className="glass-panel" style={{ padding: '2.5rem', height: '100%', display: 'flex', flexDirection: 'column', borderTop: '2px solid var(--accent-red)' }}>
+                            <Users size={32} color="var(--accent-red)" style={{ marginBottom: '1.5rem', transform: 'translateZ(30px)' }} />
                             <h3 style={{ fontSize: '1.6rem', marginBottom: '1rem', transform: 'translateZ(20px)' }}>Transformation for Unemployed</h3>
                             <p style={{ color: 'var(--text-secondary)', marginBottom: '2rem', flexGrow: 1, transform: 'translateZ(10px)' }}>Break out of the rut. We provide psychological confidence building alongside hard digital skills to help you build a sustainable income.</p>
                             <a href="/programs/unemployed" style={{ color: 'var(--accent-gold)', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '8px', transform: 'translateZ(20px)' }}>Explore track <ArrowRight size={16} /></a>
